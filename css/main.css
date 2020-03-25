@@ -1,0 +1,41 @@
+:root {
+    --main-font: 'HK Grotesk';
+    --main-bg-colour: #AEA0F2;
+}
+
+/* For mobile and desktop */
+html, body {
+    margin: 0;
+    padding: 0;
+}
+.page, .container {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+}
+
+/* For desktop (overiding) */
+@media only screen and (min-width: 768px) {
+    .container {
+        padding: 2.5vh 2.5vw;
+        width: calc(((100vh/19.5) * 9) - 5vw);
+        height: 95vh;
+    }
+}
+
+.container .loader {
+    height: 100%;
+    width: 100%;
+    background-color: var(--main-bg-colour);
+}
+.container .loader::after {
+    content: "Ticketr";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    font-family: var(--main-font);
+    font-weight: bold;
+    font-size: 3em;
+    color: #FFF;
+}
