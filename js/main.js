@@ -5,7 +5,7 @@ function initPage() {
     $(".container .home").append("<div class=\"top-nav\"></div>");
     $(".container .home .top-nav").append("<div class=\"menu\"></div>");
     $(".container .home .top-nav").append("<div class=\"profile\"></div>");
-    $(".container .home .top-nav .profile").append("<div class=\"image\" style=\"background-image: url('../assets/placeholders/logo.png');\"></div>");
+    $(".container .home .top-nav .profile").append("<div class=\"image\" style=\"background-image: url('assets/placeholders/logo.png');\"></div>");
     $(".container .home").append("<div class=\"message\">Welcome\nThomas</div>");
     $(".container .home").append("<div class=\"content\"></div>");
     $(".container .home .content").append("<div class=\"search\"></div>");
@@ -31,12 +31,12 @@ function initPage() {
 
     /* Show a button for recent activity (searches, purchases etc.) */
     $(".container .home .buttons").append("<div class=\"button\" id=\"but1\"></div>");
-    $(".container .home .buttons .button#but1").append("<div class=\"icon\" style=\"background-image: url('../assets/icons/recent.svg');\"></div>");
+    $(".container .home .buttons .button#but1").append("<div class=\"icon\" style=\"background-image: url('assets/icons/recent.svg');\"></div>");
     $(".container .home .buttons .button#but1").append("<div class=\"text\">Recent</div>");
 
     /* Show a button to show all tickets on the account/device */
     $(".container .home .buttons").append("<div class=\"button\" id=\"but2\"></div>");
-    $(".container .home .buttons .button#but2").append("<div class=\"icon\" style=\"background-image: url('../assets/icons/wallet.svg');\"></div>");
+    $(".container .home .buttons .button#but2").append("<div class=\"icon\" style=\"background-image: url('assets/icons/wallet.svg');\"></div>");
     $(".container .home .buttons .button#but2").append("<div class=\"text\">My Tickets</div>");
 
     /* Array storing all search suggestions */
