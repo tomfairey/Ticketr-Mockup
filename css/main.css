@@ -1,6 +1,7 @@
 :root {
     --main-font: 'HK Grotesk';
-    --main-bg-colour: #AEA0F2;
+    --main-accent-colour: #AEA0F2;
+    --main-bg-colour: #F6F6F6;
 }
 
 /* For mobile and desktop */
@@ -13,20 +14,27 @@ html, body {
     height: 100vh;
     position: relative;
 }
+.container {
+    background-color: var(--main-bg-colour);
+    clip-path: inset(0);
+    overflow-x: hidden;
+}
 
 /* For desktop (overiding) */
 @media only screen and (min-width: 768px) {
     .container {
-        padding: 2.5vh 2.5vw;
+        margin: 2.5vh 0 0 2.5vw;
         width: calc(((100vh/19.5) * 9) - 5vw);
         height: 95vh;
     }
 }
 
 .container .loader {
+    position: absolute;
     height: 100%;
     width: 100%;
-    background-color: var(--main-bg-colour);
+    background-color: var(--main-accent-colour);
+    z-index: 99999;
 }
 .container .loader::after {
     content: "Ticketr";
@@ -38,4 +46,193 @@ html, body {
     font-weight: bold;
     font-size: 3em;
     color: #FFF;
+}
+
+.container .home {
+    width: 100%;
+    height: 100%;
+}
+.container .home::before {
+    content: "";
+    background-color: var(--main-accent-colour);
+    padding: 30px;
+    border-radius: 50%;
+    display: block;
+    width: 175%;
+    height: 55%;
+    position: absolute;
+    margin-top: -50%;
+    margin-left: -15%;
+    z-index: 0;
+}
+
+.container .home .top-nav {
+    height: 13%;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+}
+.container .home .top-nav .menu {
+    position: relative;
+    display: inline-block;
+    left: 10%;
+    top: 50%;
+    transform: translateY(-50%) translateX(-30%);
+    background-color: #FFF;
+    -webkit-mask-image: url("../assets/icons/menu.svg");
+    mask-image: url("../assets/icons/menu.svg");
+    mask-type: alpha;
+    mask-size: 80%;
+    -webkit-mask-size: 80%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+
+    width: 48px;
+    height: 48px;
+}
+.container .home .top-nav .profile {
+    position: relative;
+    display: inline-block;
+    left: 90%;
+    top: 50%;
+    transform: translateY(-50%) translateX(-160%);
+    border: 2px #fff solid;
+    border-radius: 100%;
+    width: 48px;
+    height: 48px;
+    z-index: 2;
+}
+.container .home .top-nav .profile .image {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-size: contain;
+    border-radius: 100%;
+    z-index: 0;
+}
+
+.container .home .message {
+    width: 95%;
+    text-align: right;
+    color: white;
+    font-family: var(--main-font);
+    font-weight: bold;
+    font-size: 3.75em;
+    line-height: 1em;
+    position: relative;
+    padding-bottom: 20%;
+    margin-right: 5%;
+}
+
+.container .home .content {
+    position: relative;
+    width: 100%;
+    padding: 5% 5% 0 5%;
+}
+.container .home .content .search {
+    background-color: #fff;
+    color: #C6C6C6;
+    font-family: var(--main-font);
+    font-weight: bold;
+    font-size: 1em;
+    padding: 15px;
+    width: calc(90% - 30px);
+    position: relative;
+    border: 1px #C4C4C4 solid;
+    border-radius: 8px;
+}
+.container .home .content .search .term {
+    display: block;
+    color: #C6C6C6;
+    font-family: var(--main-font);
+    font-weight: bold;
+    font-size: 1em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.container .home .content .active {
+    margin-top: 5%;
+    background-color: #fff;
+    color: #000;
+    font-family: var(--main-font);
+    font-weight: bold;
+    font-size: 1em;
+    width: 90%;
+    position: relative;
+    border: 1px #C4C4C4 solid;
+    border-radius: 8px;
+    z-index: 1;
+}
+.container .home .content .active .ticket .expiry::before {
+    content: "Expires: ";
+    color: #777;
+}
+.container .home .content .ticket:nth-last-child(1) {
+    border-bottom: none;
+}
+.container .home .content .to-use {
+    margin-top: -2%;
+    padding-top: 2%;
+    background-color: #E5E5E5;
+    color: #000;
+    font-family: var(--main-font);
+    font-weight: bold;
+    font-size: 1em;
+    width: 90%;
+    position: relative;
+    border: 1px #C4C4C4 solid;
+    border-radius: 0 0 8px 8px;
+}
+.container .home .content .to-use .ticket .expiry::before {
+    content: "Use by: ";
+    color: #777;
+}
+.container .home .content .ticket {
+    border-bottom: 1px solid #C4C4C4;
+    padding: 15px;
+    position: relative;
+}
+.container .home .content .ticket::after {
+    position: absolute;
+    content: "";
+    background-color: #777;
+    -webkit-mask-image: url("../assets/icons/arrow-right.svg");
+    mask-image: url("../assets/icons/arrow-right.svg");
+    mask-type: alpha;
+    min-height: 24px;
+    min-width: 24px;
+    background-repeat: no-repeat;
+    background-position: center;
+    top: 50%;
+    right: 12%;
+    transform: translateX(100%) translateY(-50%);
+}
+.container .home .buttons {
+    width: 95%;
+    padding: 2.5%;
+}
+.container .home .buttons .button {
+    display: inline-block;
+    width: calc(50% - 5%);
+    margin: 2.5% 2.5% 2.5% 2.5%;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 8px;
+}
+.container .home .buttons .button .icon {
+    min-height: 128px;
+    background-image: url("../assets/placeholders/logo.png");
+    background-size: 50%;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 2.5%;
+}
+.container .home .buttons .button .text {
+    text-align: center;
+    color: #000;
+    font-family: var(--main-font);
+    font-weight: bold;
+    font-size: 1.2em;
+    padding: 2.5% 2.5% 5% 2.5%;
 }
