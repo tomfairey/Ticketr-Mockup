@@ -1,0 +1,38 @@
+/* For mobile and desktop */
+html, body {
+    margin: 0;
+    padding: 0;
+}
+.page, .container {
+    width: 100vw;
+    height: 100vh;
+}
+
+/* For desktop (overiding) */
+@media only screen and (min-width: 768px) {
+    .device  {
+        width: 450px;
+        height: 900px;
+        position: absolute;
+        background-image: url("../assets/devices/redmi_k20.png");
+        background-position: -55px -50px;
+        background-repeat: no-repeat;
+        background-size: 125%;
+        margin-top: -55px;
+    }
+    .container {
+        width: 380px;
+        height: 810px;
+        margin: 60px 0 0 35px;
+        padding-top: 10px;
+    }
+}
+
+.container .loader {
+    height: 100%;
+    width: 100%;
+    background-color: #00ff00;
+}
+.container .loader::after {
+    content: "Ticketr";
+}
