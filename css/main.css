@@ -4,6 +4,14 @@
     --main-bg-colour: #F6F6F6;
 }
 
+@font-face {
+    font-family: "HK Grotesk";
+    font-weight: bold;
+    src: url("../assets/fonts/HK\ Grotesk/HKGrotesk-Bold.eot");
+    src: url("../assets/fonts/HK\ Grotesk/HKGrotesk-Bold.woff2") format("woff2"),
+    url("../assets/fonts/HK\ Grotesk/HKGrotesk-Bold.woff") format("woff");
+}
+
 /* For mobile and desktop */
 html, body {
     margin: 0;
