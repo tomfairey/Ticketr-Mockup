@@ -183,6 +183,8 @@ function initPage() {
                 /* Hide the loader after one second, displaying the app beneath */
                 setTimeout(function() { $(".container .loader").fadeOut("slow"); }, 1000);
             }
+        } else {
+            setTimeout(function() { $(".container .loader").fadeOut("slow"); }, 1000);
         }
     } else {
         /* Hide the loader after one second, displaying the app beneath */
