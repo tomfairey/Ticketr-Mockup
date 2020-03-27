@@ -164,30 +164,43 @@ function initPage() {
     }
 
     /* When the device is a mobile phone make the site fullscreen if possible */
-    if (!window.matchMedia('(min-width: 768px)').matches) {
-        if (!document.fullscreenElement) {
-            document.documentElement.requestFullscreen();
+    try {
+        if (!window.matchMedia('(min-width: 768px)').matches) {
             if (!document.fullscreenElement) {
-                setTimeout(function() { $(".container .loader").addClass("doFullscreen"); }, 900);
-                $(".container .loader").click(function() {
+                if (document.documentElement.requestFullscreen) {
                     document.documentElement.requestFullscreen();
-                    setTimeout(function() {
-                        if (!document.fullscreenElement) {
-                            console.log("Fullscreen not supported...");
-                        }
-                        /* Hide the loader displaying the app beneath */
-                        $(".container .loader").fadeOut("slow");
-                    }, 1750);
-                });
+                } else if (document.documentElement.mozRequestFullScreen) {
+                    document.documentElement.mozRequestFullScreen();
+                } else if (document.documentElement.webkitRequestFullscreen) {
+                    document.documentElement.webkitRequestFullscreen();
+                } else if (document.documentElement.msRequestFullscreen) {
+                    document.documentElement.msRequestFullscreen();
+                }
+                if (!document.fullscreenElement) {
+                    setTimeout(function() { $(".container .loader").addClass("doFullscreen"); }, 900);
+                    $(".container .loader").click(function() {
+                        document.documentElement.requestFullscreen();
+                        setTimeout(function() {
+                            if (!document.fullscreenElement) {
+                                console.log("Fullscreen not supported...");
+                            }
+                            /* Hide the loader displaying the app beneath */
+                            $(".container .loader").fadeOut("slow");
+                        }, 1750);
+                    });
+                } else {
+                    /* Hide the loader after one second, displaying the app beneath */
+                    setTimeout(function() { $(".container .loader").fadeOut("slow"); }, 1000);
+                }
             } else {
-                /* Hide the loader after one second, displaying the app beneath */
                 setTimeout(function() { $(".container .loader").fadeOut("slow"); }, 1000);
             }
         } else {
+            /* Hide the loader after one second, displaying the app beneath */
             setTimeout(function() { $(".container .loader").fadeOut("slow"); }, 1000);
         }
-    } else {
-        /* Hide the loader after one second, displaying the app beneath */
+    } catch (e) {
+        console.alert("Fullscreen error:", e);
         setTimeout(function() { $(".container .loader").fadeOut("slow"); }, 1000);
     }
 }
