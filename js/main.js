@@ -179,7 +179,15 @@ function initPage() {
                 if (!document.fullscreenElement) {
                     setTimeout(function() { $(".container .loader").addClass("doFullscreen"); }, 900);
                     $(".container .loader").click(function() {
-                        document.documentElement.requestFullscreen();
+                        if (document.documentElement.requestFullscreen) {
+                            document.documentElement.requestFullscreen();
+                        } else if (document.documentElement.mozRequestFullScreen) {
+                            document.documentElement.mozRequestFullScreen();
+                        } else if (document.documentElement.webkitRequestFullscreen) {
+                            document.documentElement.webkitRequestFullscreen();
+                        } else if (document.documentElement.msRequestFullscreen) {
+                            document.documentElement.msRequestFullscreen();
+                        }
                         setTimeout(function() {
                             if (!document.fullscreenElement) {
                                 console.log("Fullscreen not supported...");
