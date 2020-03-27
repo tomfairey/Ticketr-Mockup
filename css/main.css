@@ -55,6 +55,17 @@ html, body {
     font-size: 3em;
     color: #FFF;
 }
+.container .loader.doFullscreen::after {
+    content: "Tap here";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    font-family: var(--main-font);
+    font-weight: bold;
+    font-size: 3em;
+    color: #FFF;
+}
 
 .container .home {
     width: 100%;
@@ -159,7 +170,7 @@ html, body {
     overflow: hidden;
     text-overflow: ellipsis;
 }
-.container .home .content .active {
+.container .home .content .activeJourney, .container .home .content .active {
     margin-top: 5%;
     background-color: #fff;
     color: #000;
@@ -172,14 +183,35 @@ html, body {
     border-radius: 8px;
     z-index: 1;
 }
-.container .home .content .active .ticket .expiry::before {
+.container .home .content .activeJourney  > .info {
+    padding: 15px 15px 0 15px;
+    position: relative;
+    color: #777;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 90%;
+}
+.container .home .content .activeJourney .ticket .info::before {
+    content: "Valid for: ";
+    color: #777;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 90%;
+}
+.container .home .content .active .ticket .info::before {
     content: "Expires: ";
     color: #777;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 90%;
 }
 .container .home .content .ticket:nth-last-child(1) {
     border-bottom: none;
 }
-.container .home .content .to-use {
+.container .home .content .updateJourney, .container .home .content .to-use {
     margin-top: -2%;
     padding-top: 2%;
     background-color: #E5E5E5;
@@ -192,9 +224,13 @@ html, body {
     border: 1px #C4C4C4 solid;
     border-radius: 0 0 8px 8px;
 }
-.container .home .content .to-use .ticket .expiry::before {
+.container .home .content .to-use .ticket .info::before {
     content: "Use by: ";
     color: #777;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 90%;
 }
 .container .home .content .ticket {
     border-bottom: 1px solid #C4C4C4;
@@ -215,6 +251,18 @@ html, body {
     top: 50%;
     right: 12%;
     transform: translateX(100%) translateY(-50%);
+}
+.container .home .content .ticket .name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 90%;
+}
+.container .home .content .ticket .info {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 90%;
 }
 .container .home .buttons {
     width: 95%;

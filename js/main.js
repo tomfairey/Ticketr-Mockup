@@ -10,24 +10,43 @@ function initPage() {
     $(".container .home").append("<div class=\"content\"></div>");
     $(".container .home .content").append("<div class=\"search\"></div>");
     $(".container .home .content .search").append("<div class=\"term\"></div>");
+    $(".container .home .content").append("<div class=\"activeJourney\"></div>");
+    $(".container .home .content").append("<div class=\"updateJourney\"></div>");
     $(".container .home .content").append("<div class=\"active\"></div>");
     $(".container .home .content").append("<div class=\"to-use\"></div>");
     $(".container .home").append("<div class=\"buttons\"></div>");
 
     /* Show a CityWide 7-Day ticket that expires Monday at 4am */
+    $(".container .home .content .activeJourney").append("<div class=\"info\">Your journey to 'Chesterfield':</div>");
+
+    /* Show a CityWide 7-Day ticket that expires Monday at 4am */
+    $(".container .home .content .activeJourney").append("<div class=\"ticket\" id=\"curtik1\"></div>");
+    $(".container .home .content .activeJourney .ticket#curtik1").append("<div class=\"name\">Tram only 1-day</div>");
+    $(".container .home .content .activeJourney .ticket#curtik1").append("<div class=\"info\">Tram to Sheffield Station</div>");
+
+    /* Show a GetAbout+ 1-Day ticket that expires tomorrow at 4am */
+    $(".container .home .content .activeJourney").append("<div class=\"ticket\" id=\"curtik2\"></div>");
+    $(".container .home .content .activeJourney .ticket#curtik2").append("<div class=\"name\">Sheffield - Chesterfield return</div>");
+    $(".container .home .content .activeJourney .ticket#curtik2").append("<div class=\"info\">'EMR' off-peak services</div>");
+
+    /* Show a GetAbout+ 1-Day ticket that must be used by Friday */
+    $(".container .home .content .updateJourney").append("<div class=\"ticket\"></div>");
+    $(".container .home .content .updateJourney .ticket").append("<div class=\"name\">Delays on your 'EMR' ticket to 'Chesterfield'</div>");
+
+    /* Show a CityWide 7-Day ticket that expires Monday at 4am */
     $(".container .home .content .active").append("<div class=\"ticket\" id=\"tik1\"></div>");
     $(".container .home .content .active .ticket#tik1").append("<div class=\"name\">CityWide 7-Day</div>");
-    $(".container .home .content .active .ticket#tik1").append("<div class=\"expiry\">Monday at 4am</div>");
+    $(".container .home .content .active .ticket#tik1").append("<div class=\"info\">Monday at 4am</div>");
 
     /* Show a GetAbout+ 1-Day ticket that expires tomorrow at 4am */
     $(".container .home .content .active").append("<div class=\"ticket\" id=\"tik2\"></div>");
     $(".container .home .content .active .ticket#tik2").append("<div class=\"name\">GetAbout+ 1-Day</div>");
-    $(".container .home .content .active .ticket#tik2").append("<div class=\"expiry\">Tomorrow at 4am</div>");
+    $(".container .home .content .active .ticket#tik2").append("<div class=\"info\">Tomorrow at 4am</div>");
 
     /* Show a GetAbout+ 1-Day ticket that must be used by Friday */
     $(".container .home .content .to-use").append("<div class=\"ticket\" id=\"tik3\"></div>");
     $(".container .home .content .to-use .ticket#tik3").append("<div class=\"name\">GetAbout+ 1-Day</div>");
-    $(".container .home .content .to-use .ticket#tik3").append("<div class=\"expiry\">Friday</div>");
+    $(".container .home .content .to-use .ticket#tik3").append("<div class=\"info\">Friday</div>");
 
     /* Show a button for recent activity (searches, purchases etc.) */
     $(".container .home .buttons").append("<div class=\"button\" id=\"but1\"></div>");
@@ -112,33 +131,63 @@ function initPage() {
 
     /* Declare the array to store the index of already shown values */
     let lastRandomIntsArray = [];
+    var animateSearchSuggestionsPaused = false;
 
     /* Change and animate the search suggestion displayed to the user */
     function animateSearchSuggestions() {
-        let randomInt = Math.floor(Math.random() * searchTermsArray.length);
-        /* Prevent the same string showing more than once in 10 times */
-        while (lastRandomIntsArray.includes(randomInt)) {
-            randomInt = Math.floor(Math.random() * searchTermsArray.length);
-        };
-        /* Change the search suggestion */
-        $(".container .home .content .search .term").html("Search " + searchTermsArray[randomInt]);
-        /* Fade the search suggestion into view */
-        $(".container .home .content .search .term").fadeIn("slow");
-        /* Allow showing the same result after 10 other results */
-        if (lastRandomIntsArray.length > 10) lastRandomIntsArray.length = 10;
-        lastRandomIntsArray.unshift(randomInt);
-        /* Fade the search suggestion out of view before next term */
-        setTimeout(function() {
-            $(".container .home .content .search .term").fadeOut("slow");
-        }, 9500);
+        if(animateSearchSuggestionsPaused == false) {
+            let randomInt = Math.floor(Math.random() * searchTermsArray.length);
+            /* Prevent the same string showing more than once in 10 times */
+            while (lastRandomIntsArray.includes(randomInt)) {
+                randomInt = Math.floor(Math.random() * searchTermsArray.length);
+            };
+            /* Change the search suggestion */
+            $(".container .home .content .search .term").html("Search " + searchTermsArray[randomInt]);
+            /* Fade the search suggestion into view */
+            $(".container .home .content .search .term").fadeIn("slow");
+            /* Allow showing the same result after 10 other results */
+            if (lastRandomIntsArray.length > 10) lastRandomIntsArray.length = 10;
+            lastRandomIntsArray.unshift(randomInt);
+            /* Fade the search suggestion out of view before next term */
+            setTimeout(function() {
+                $(".container .home .content .search .term").fadeOut("slow");
+            }, 9500);
+        }
     };
     animateSearchSuggestions();
 
     /* Change the search suggestion every ten seconds */
     let searchTermInterval = setInterval(animateSearchSuggestions, 10000);
 
-    /* Hide the loader after one second displaying the app beneath */
-    setTimeout(function() { $(".container .loader").fadeOut("slow"); }, 1000);
+    function showSearchPopup() {
+
+    }
+
+    /* When the device is a mobile phone make the site fullscreen if possible */
+    if (!window.matchMedia('(min-width: 768px)').matches) {
+        if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen();
+            if (!document.fullscreenElement) {
+                setTimeout(function() { $(".container .loader").addClass("doFullscreen"); }, 900);
+                $(".container .loader").click(function() {
+                    document.documentElement.requestFullscreen();
+                    setTimeout(function() {
+                        if (!document.fullscreenElement) {
+                            console.log("Fullscreen not supported...");
+                        }
+                        /* Hide the loader displaying the app beneath */
+                        $(".container .loader").fadeOut("slow");
+                    }, 1750);
+                });
+            } else {
+                /* Hide the loader after one second, displaying the app beneath */
+                setTimeout(function() { $(".container .loader").fadeOut("slow"); }, 1000);
+            }
+        }
+    } else {
+        /* Hide the loader after one second, displaying the app beneath */
+        setTimeout(function() { $(".container .loader").fadeOut("slow"); }, 1000);
+    }
 }
 
 /* After the page is loaded begin page initialisation */
