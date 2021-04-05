@@ -1,6 +1,9 @@
 # Ticketr Mockup
  A web-based mockup of my Computer Science travel app named Ticketr
+ 
+ This has been depreciated in favour of my designs using Figma [available here](https://www.figma.com/file/qtg1TFYnpVcFtA3zNrCIP9/Travel-App-Mk-2 "Travel App Mk 2 - Figma").
 
+## Licenses
 Some icons made by [Kiranshastry](https://www.flaticon.com/authors/kiranshastry) from [www.flaticon.com](https://www.flaticon.com)
 
 Some ticket names are property of [Travelmaster](https://sytravelmaster.com/)
